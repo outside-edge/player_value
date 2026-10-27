@@ -1,108 +1,111 @@
-## Cricket WAR
+# Player value
 
-WAR stands for **Wins Above Replacement**. Originally developed in baseball, it quantifies how many more wins a player contributes relative to a "replacement-level" player — a hypothetical freely available, average substitute. In cricket, WAR can be adapted to estimate how many wins a player contributes over replacement based on run-scoring (batting) or run-prevention (bowling).
+Cricket player strength and contributions: ratings, histories, uncertainty, and
+comparisons across methods. This is the player-level counterpart to
+[Outside Edge's team ratings](https://outside-edge.github.io/side_order/).
 
-We construct both **batting WAR** and **bowling WAR**, and split all calculations by gender (men's and women's ODIs), acknowledging the substantial differences in scoring patterns and match contexts.
+[Rankings website](https://outside-edge.github.io/player_value/) ·
+[Test](https://outside-edge.github.io/player_value/docs/test.html) ·
+[ODI](https://outside-edge.github.io/player_value/docs/odi.html) ·
+[T20I](https://outside-edge.github.io/player_value/docs/t20i.html) ·
+[Data and downloads](https://outside-edge.github.io/player_value/docs/data.html)
 
-![ODI Batting WAR Men](readme/odi_batting_men.png)
-![ODI Batting WAR Women](readme/odi_batting_women.png)
+The project distinguishes **strength**, an estimate of a player's ability at a
+given date, from **contribution**, the value of their performances in matches
+already played. Models retain their own units and assumptions. WAR is one
+possible contribution measure, not the definition of every player rating.
 
----
+## Current status
 
-### 1. Naive Batting WAR
+[Player rankings](docs/ratings.qmd) are available for **Tests, ODIs, and T20
+internationals**, separately for men and women, through **26 October 2026**.
+The player-only models use five years of match outcomes; Tests include draws.
+Every table includes appearances and downloadable coefficients. Women's Tests
+have very little data and use the specified untuned regularization setting.
+These are exploratory lineup associations, not WAR or instantaneous form.
 
-The naive approach assumes all run-scoring opportunities are equal. It focuses purely on aggregate statistics like total runs, strike rate, and balls faced.
+The separate [ODI experiment](docs/models.qmd) compares team-only, player-only,
+and combined models on chronological holdouts. Contribution estimates and
+uncertainty intervals for individual ranks remain future work.
 
-**Formula:**
-Let:
+The earlier WAR notebooks, results, and figures are preserved in
+[the exploratory collection](https://github.com/outside-edge/player_value/tree/main/experiments).
+Their runs-to-wins conversion and replacement assumptions are not production
+defaults. See the [modeling agenda](docs/models.qmd) for the research sequence and
+acceptance criteria.
 
-* \$R\_i\$: total runs scored by player \$i\$
-* \$B\_i\$: balls faced by player \$i\$
-* \$SR\_{rep}\$: replacement-level strike rate (e.g., 20th percentile of observed strike rates)
-* \$R\_{rep, i} = B\_i \times \frac{SR\_{rep}}{100}\$: expected runs for replacement-level batter
+## Run locally
 
-Then:
+Install Python 3.12 or later and [uv](https://docs.astral.sh/uv/), then run:
 
-$$
-WAR_i^{naive} = \frac{R_i - R_{rep, i}}{10}
-$$
+```sh
+make sync
+make check
+make fetch
+make prepare AS_OF=2026-10-26
+```
 
-Here, we assume **10 runs = 1 win**, a simplifying normalization.
+`make fetch` downloads the official Cricsheet ODI JSON archive and records its
+checksum and retrieval time. `make prepare` validates identities and outcomes,
+retains matches through the specified date, and writes match, participant, and
+player tables to `data/build/odis/`. It does not estimate player ability.
 
----
+An existing Cricsheet JSON or YAML directory can be prepared without downloading:
 
-### 2. Context-Adjusted Batting WAR
+```sh
+make prepare DATA_DIR=data/odis AS_OF=2026-10-26
+```
 
-Context matters: players bat in different overs, roles, and eras. To estimate performance fairly, we model expected runs per ball as a function of context using a **Generalized Additive Model (GAM)**.
+Run the specified 2023–2025 forecast comparison and assemble its saved results:
 
-**Features used:**
+```sh
+make compare
+make publish
+```
 
-* \$t\$: over number (continuous)
-* \$p\$: inferred batting position (categorical)
-* \$y\$: year (categorical)
+`make compare` tunes each model using past matches, then evaluates annual holdouts
+with three- and five-year training windows. `make publish` verifies the saved
+outputs and creates the website's tables and downloads. The saved publication
+can be rendered without downloading data or rerunning models. See the
+[experiment specification](docs/lineup_experiment.qmd).
 
-**Model:**
+To build the additional format tables after preparing ODIs:
 
-$$
-\mathbb{E}[r_{i,j}] = f_1(t_{i,j}) + f_2(p_{i,j}) + f_3(y_{i,j})
-$$
+```sh
+make fetch FORMAT=Test
+make prepare FORMAT=Test AS_OF=2026-10-26
+make fetch FORMAT=T20I
+make prepare FORMAT=T20I AS_OF=2026-10-26 PREPARE_ARGS="--since 2021-10-27"
+make rankings AS_OF=2026-10-26
+```
 
-Where:
+`make rankings` tunes and fits six player-only models, then writes verified CSVs,
+model parameters, and provenance to `out/release/current/`. The T20 preparation
+start matches the five-year window; adjust it when changing the ranking cutoff.
+See the [ranking specification](docs/format_rankings.qmd) and
+[pipeline guide](docs/pipeline.qmd).
 
-* \$r\_{i,j}\$: runs scored by player \$i\$ on ball \$j\$
-* \$f\_1\$: smooth spline on over
-* \$f\_2, f\_3\$: factor effects for position and year
+Install [Quarto](https://quarto.org/docs/get-started/) to render the website:
 
-**Replacement Adjustment:**
-To define a replacement-level player, we scale down the predicted expected runs:
+```sh
+make site
+```
 
-$$
-R^{rep}_{i} = \alpha \cdot \sum_j \hat{r}_{i,j}, \text{ with } \alpha = 0.85
-$$
+Rendering uses saved documentation and does not fetch data or fit models.
+`make ci-docker` runs the Python checks in a standard Python container when Docker
+is running. The [pipeline guide](docs/pipeline.qmd) describes commands, outputs,
+and provenance.
 
-**Contextual WAR:**
+## Publication
 
-$$
-WAR_i^{context} = \frac{\sum_j r_{i,j} - R^{rep}_{i}}{10}
-$$
+- [Rankings](docs/ratings.qmd): Test, ODI, and T20I player tables and exposure flags.
+- [Contributions](docs/contributions.qmd): match, season, and career value.
+- [Player histories](docs/histories.qmd): dated estimates and retrospective histories.
+- [Model comparisons](docs/models.qmd): research priorities and forecast evaluation.
+- [Methods and data](docs/methods.qmd): definitions, coverage, and limitations.
 
----
-
-### 3. Bowling WAR
-
-Bowling WAR focuses on **run prevention**. For each bowler, we compute their actual runs conceded and compare it to what a replacement-level bowler would have conceded in the same number of balls.
-
-**Steps:**
-
-1. Aggregate:
-
-   * Balls bowled
-   * Runs conceded
-2. Compute:
-
-   * Bowler’s runs per ball (RPB)
-   * Replacement RPB: 80th percentile of all RPBs
-   * Expected replacement runs: \$\text{balls} \times \text{replacement RPB}\$
-
-**Bowling WAR Formula:**
-
-$$
-WAR_i^{bowling} = \frac{\text{replacement\_runs}_i - \text{actual\_runs}_i}{10}
-$$
-
-As with batting, we assume 10 runs = 1 win. This is a simplification that normalizes scale.
-
----
-
-### Summary
-
-| Metric          | Context-Aware | Replacement Defined By               | Model Used             | Gender Split? |
-| --------------- | ------------- | ------------------------------------ | ---------------------- | ------------- |
-| Naive Batting   | No            | Fixed strike rate percentile         | None (formulaic)       | Yes           |
-| Context Batting | Yes           | GAM-predicted runs \$\times \alpha\$ | GAM (spline + factors) | Yes           |
-| Bowling WAR     | No            | Percentile of runs-per-ball          | None (formulaic)       | Yes           |
-
-### Data
-
-We use data from [https://cricsheet.org/downloads/](https://cricsheet.org/downloads/) and parse individual YAMLs to compute WAR metrics separately for men and women, ensuring fair comparisons across formats.
+Each publication will identify its model, cutoff, competition, units, and
+uncertainty method. Rate measures and cumulative contributions will be reported
+separately. Team ratings remain in `side_order`; any comparison will use dated
+exports rather than a dependency on a sibling checkout.
 

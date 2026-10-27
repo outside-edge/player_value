@@ -1,0 +1,16 @@
+---
+title: T20I player rankings
+---
+
+{{< include ../out/site-content/t20i.md >}}
+
+## Interpretation
+
+These player-only ratings adjust for the identities of teammates and opponents,
+plus the toss and batting first. Selection into the XI is not random; favorable
+conditions and selective appearances can still influence the coefficients.
+
+See [methods and selection bias](methods.qmd#selection-and-match-difficulty),
+[the ranking specification](format_rankings.qmd), and
+[data and downloads](data.qmd). Scores are comparable within each table, not
+between formats or genders. The window includes players who have since retired.

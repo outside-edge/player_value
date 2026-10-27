@@ -1,0 +1,126 @@
+---
+title: Reproducing the project
+---
+
+## Commands
+
+`make sync` restores the Python environment from `uv.lock`. `make check` runs
+Black, isort, flake8, and pytest. `make ci-docker` runs the same checks using the
+standard `python:3.14-slim` image, without modifying the mounted checkout.
+
+```sh
+make fetch
+make prepare AS_OF=2026-10-26
+make compare
+make publish
+make site
+```
+
+`AS_OF` defaults to the current UTC date; supply it explicitly for reproducibility.
+`DATA_DIR` defaults to `data/raw/cricsheet/odis`. Preparation can also read the
+existing local `data/odis` YAML directory. Numeric filenames are Cricsheet match
+IDs; mixing two representations of the same ID is an error.
+
+The website is rendered with Quarto 1.10.19 in CI. `QUARTO` can point to a local
+binary. The homepage includes the README automatically. Rendering does not acquire
+data, execute the exploratory notebooks, or refit models. A post-render check
+verifies local links and assets. Before rendering, saved publication checksums
+are verified. Format pages and the coverage table are generated automatically
+from the saved rankings and manifest. The publication is included in the repository so CI and readers can
+render it without fetching match data or estimating models.
+
+`make compare` reads the prepared tables and verifies their hashes. It runs the
+specified three models on 2023–2025 annual holdouts, with separate gender fits and
+three- and five-year training windows. `MODEL_ARGS` can override years/windows
+for an explicitly exploratory run. See the [specification](lineup_experiment.qmd).
+
+`make publish` verifies saved analysis files and copies them into a publication
+with generated tables and download links. Changed analysis files fail validation
+before the preceding publication is replaced. Predictions, paired losses, tuning
+scores, coefficients, calibration, diagnostics, and source provenance are retained.
+Publication also ranks the saved player coefficients within each competition,
+model, window, and cutoff. It generates the ranking page and `rankings.csv` without
+refitting the model. Publication code hashes are separate from the preserved
+analysis code hashes.
+
+## Rankings by format
+
+After preparing ODIs, acquire and prepare the other two international formats:
+
+```sh
+make fetch FORMAT=Test
+make prepare FORMAT=Test AS_OF=2026-10-26
+make fetch FORMAT=T20I
+make prepare FORMAT=T20I AS_OF=2026-10-26 PREPARE_ARGS="--since 2021-10-27"
+make rankings AS_OF=2026-10-26
+```
+
+`FORMAT` selects the official archive and format-specific default directories.
+The general `--since` preparation option filters by match start date and records
+excluded files with their hashes. Here it sets the T20 input to the five-year
+ranking window, excluding an older identity conflict documented in the
+[specification](format_rankings.qmd). Update that boundary when changing the cutoff.
+Included matches still undergo strict identity checks. Ranking refuses prepared
+inputs that omit part of the requested window.
+
+`make rankings` fits the six cohorts and replaces `out/release/current/` only
+once all fits succeed. It saves an all-player CSV, six format/gender CSVs,
+reconstructible model parameters, preparation manifests, the specification, and
+code/output hashes. Ranking cutoffs and tuning split IDs are recorded. Models are
+fitted during this command; website rendering only checks and displays saved files.
+The CLI accepts `--specification` when running outside the source checkout.
+
+## Layout
+
+| Location | Contents |
+| --- | --- |
+| `data/raw/cricsheet/odis/` | Downloaded archive, JSON matches, and acquisition receipt |
+| `data/build/odis/` | Validated match, participant, and identity tables with manifest |
+| `src/player_value/` | Acquisition, preparation, CLI, and website checks |
+| `tests/` | Synthetic fixtures and behavior tests |
+| `experiments/war/` | Preserved exploratory notebooks and results |
+| `out/analysis/lineup/` | Saved fits' coefficients, forecasts, tuning, and evaluation |
+| `out/release/current/` | Five-year rankings by format, model parameters, and provenance |
+| `out/release/lineup/` | Verified research publication and generated summary |
+| `docs/` | Website source and research specifications |
+| `out/site/` | Rendered website |
+
+Additional models will keep their own results under `out/analysis/` and verified
+publication tables under `out/release/`. The format-ranking command publishes rolling-window associations. Dynamic
+current-strength and WAR models remain future work.
+
+## Prepared tables
+
+`matches.csv` has one row per match. Dates, gender, format, teams, venue, toss,
+outcome, delivery count, and lineup eligibility are preserved. `team_a` and
+`team_b` are alphabetical labels, not home/away designations. Boolean flags are
+0/1. Empty cells mean missing or not applicable, not zero.
+
+`participants.csv` has one row per match, team, and player ID, retaining the
+source's player name. `players.csv` has one row per stable ID, the latest observed
+name, and the first and last appearance dates within the prepared sample.
+
+`manifest.json` records the cutoff, source-file hashes and exclusions, counts by
+gender, preparation-code hash, output hashes, and the acquisition receipt when
+available. Existing local downloads without a receipt are labeled with a null
+receipt; preparation does not invent a retrieval date. A cutoff filters match
+dates but does not recreate the source data as they existed on that date.
+
+Acquisition and preparation build a temporary directory before replacing their
+destination. Errors preserve the previous successful stage. If an interrupted
+installation leaves a `.previous` directory, inspect and resolve it before rerunning.
+Raw downloads, build products, and analysis intermediates are ignored by Git.
+Verified publication files under `out/release/` are intended for version control.
+
+## Repository transition
+
+This project continues `outside-edge/war` under the name `outside-edge/player_value`.
+The existing history is retained. The original artifacts have a checksum relocation
+record in `experiments/relocations.csv`; their numerical contents are unchanged.
+The local checkout directory can retain its existing name without affecting any
+commands. There is no dependency on `../side_order`.
+
+CI checks the package, builds its distribution, and renders the website. The Pages
+workflow deploys the website after checks pass on pushes to main, and can also
+be triggered manually. Scheduled rating updates and player-value releases remain gated on the
+model-validation criteria in [Model comparisons](models.qmd).

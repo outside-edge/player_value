@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "data_version": "1.1.0"
+  },
+  "info": {
+    "dates": [
+      "2024-01-01"
+    ],
+    "gender": "male",
+    "match_type": "ODI",
+    "teams": [
+      "Beta",
+      "Alpha"
+    ],
+    "venue": "Example Ground",
+    "balls_per_over": 6,
+    "overs": 50,
+    "toss": {
+      "winner": "Alpha",
+      "decision": "bat"
+    },
+    "outcome": {
+      "winner": "Alpha",
+      "by": {
+        "runs": 1
+      }
+    },
+    "players": {
+      "Alpha": [
+        "Alpha 0",
+        "Alpha 1",
+        "Alpha 2",
+        "Alpha 3",
+        "Alpha 4",
+        "Alpha 5",
+        "Alpha 6",
+        "Alpha 7",
+        "Alpha 8",
+        "Alpha 9",
+        "Alpha 10"
+      ],
+      "Beta": [
+        "Beta 0",
+        "Beta 1",
+        "Beta 2",
+        "Beta 3",
+        "Beta 4",
+        "Beta 5",
+        "Beta 6",
+        "Beta 7",
+        "Beta 8",
+        "Beta 9",
+        "Beta 10"
+      ]
+    },
+    "registry": {
+      "people": {
+        "Alpha 0": "alpha00",
+        "Alpha 1": "alpha01",
+        "Alpha 2": "alpha02",
+        "Alpha 3": "alpha03",
+        "Alpha 4": "alpha04",
+        "Alpha 5": "alpha05",
+        "Alpha 6": "alpha06",
+        "Alpha 7": "alpha07",
+        "Alpha 8": "alpha08",
+        "Alpha 9": "alpha09",
+        "Alpha 10": "alpha10",
+        "Beta 0": "beta00",
+        "Beta 1": "beta01",
+        "Beta 2": "beta02",
+        "Beta 3": "beta03",
+        "Beta 4": "beta04",
+        "Beta 5": "beta05",
+        "Beta 6": "beta06",
+        "Beta 7": "beta07",
+        "Beta 8": "beta08",
+        "Beta 9": "beta09",
+        "Beta 10": "beta10"
+      }
+    }
+  },
+  "innings": [
+    {
+      "team": "Alpha",
+      "overs": [
+        {
+          "over": 0,
+          "deliveries": [
+            {
+              "batter": "Alpha 0",
+              "non_striker": "Alpha 1",
+              "bowler": "Beta 0",
+              "runs": {
+                "batter": 4,
+                "extras": 0,
+                "total": 4
+              }
+            },
+            {
+              "batter": "Alpha 0",
+              "non_striker": "Alpha 1",
+              "bowler": "Beta 0",
+              "runs": {
+                "batter": 0,
+                "extras": 1,
+                "total": 1
+              },
+              "extras": {
+                "wides": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

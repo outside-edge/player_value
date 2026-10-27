@@ -1,0 +1,93 @@
+---
+title: Rankings by format — specification
+---
+
+This specification was written before fitting the new format tables. The earlier
+ODI forecast comparison and its historical coefficients have already been seen.
+This is an exploratory extension, not a blinded confirmatory analysis.
+
+## Population and quantity
+
+Estimate a regularized, player-only lineup association with match outcome for
+Tests, ODIs, and T20 internationals, separately for men and women. The first
+release uses matches starting after 26 October 2021 and completed by 26 October
+2026. Every match has equal weight. All observed players in that window remain
+eligible, including players who have since retired. Scores summarize the window;
+they are not instantaneous form, causal effects, or wins above replacement.
+
+Use official Cricsheet international archives and stable registry IDs. Require
+exactly eleven listed players per side and no recorded match replacements.
+Exclude no-results and incomplete matches. Retain Test draws and ties; restrict
+ODIs and T20Is to decisive outcomes. Source coverage and withheld matches limit
+the population. Record exclusions, match IDs, dates, hashes, and acquisition receipts.
+
+## Estimation
+
+The predictor is the sum of side A's player coefficients minus side B's, plus
+signed toss-winner and batting-first controls. No team coefficients, interactions,
+venue adjustments, recency weights, or role-specific terms are included.
+
+For decisive matches use ridge logistic regression with no intercept. For Tests
+with draws use a symmetric three-outcome multinomial model (the Davidson form):
+
+$$
+P(A\text{ wins}):P(\text{draw}):P(B\text{ wins})
+= \exp(\eta/2):\nu:\exp(-\eta/2).
+$$
+
+Implement symmetry by supplying both orientations of each match, each with
+weight one half. Multinomial logistic regression has opposite win/loss coefficient
+vectors, zero draw slopes, equal win/loss intercepts, and a free draw intercept.
+The published score is the win-minus-loss coefficient: additive in log win/loss
+odds, conditional on a decisive result. Draws affect estimation and predicted
+outcomes. A draw-free cohort uses the binary model. A cohort containing only draws
+cannot identify directional strength and receives no ranking.
+
+Test ties share the draw category. Use half the stated C in the three-outcome
+estimator: its win/loss slopes are ±half the published score. This matches the
+binary model's ridge penalty on the published score, $\|\beta\|^2/(2C)$.
+The exported model records both the stated C and the estimator's C. This convention
+was clarified during independent design review, before fitting the format tables.
+
+Tune C over 0.01, 0.1, 1, 10 using the final year of the window as chronological
+validation and earlier completed matches as training. Exclude matches crossing
+the validation boundary from tuning. Use mean outcome log loss, preferring the
+smaller C on a tie; refit the selected model on the entire five-year window.
+Require at least 20 training and 10 validation matches and a decisive training
+outcome; when a cohort contains draws, require a training draw too. Otherwise use
+C=0.1, explicitly labeled untuned. These counts are operational tuning rules, not
+claims about adequate inferential precision. No new untouched test set is claimed.
+
+## Reporting and checks
+
+Rank coefficients within each format, gender, and connected comparison group.
+Link groups through matches or shared players, and never rank disconnected groups
+against each other. Use competition ranks for numerical ties to twelve decimals.
+Publish all players, appearances, teams, last appearance, regularization, and
+identical-lineup diagnostics. Flag fewer than twenty appearances; this flag is
+descriptive and is not a selection threshold. Report sample sizes and tuning
+status beside each table. No rank intervals or significance claims are produced.
+
+Player-only models avoid the additional team-versus-player allocation ambiguity,
+but stable teammates and unmeasured team conditions still confound attribution.
+Connectedness is necessary, not sufficient, for independently identifying players.
+Scores have meaning within a fit, not across formats or genders. A larger player
+coefficient is a model association, not proof of superiority in every context.
+The Test model uses a common draw propensity; weather and playing conditions can
+also cause draws and are not modeled separately.
+
+The T20 preparation starts at the ranking window boundary. This excludes an older
+source identity conflict (match 1229824, 21 August 2020, the same J Butler ID on both
+sides) without assigning an invented identity. Every excluded file retains its
+hash and date-exclusion status in the preparation manifest. Included records still
+fail validation on identity conflicts.
+
+Before publication test side-swapping symmetry, preservation of match weight,
+binary agreement with the existing estimator, recovery in synthetic draw data,
+chronological boundaries, format/gender separation, disconnected groups, and
+provenance integrity. Obtain an independent review of the design and code.
+Preserve the earlier ODI experiment and publication unchanged.
+
+References: [Cricsheet JSON](https://cricsheet.org/format/json/),
+[Davidson (1970)](https://doi.org/10.1080/01621459.1970.10481082), and
+[scikit-learn logistic regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html).

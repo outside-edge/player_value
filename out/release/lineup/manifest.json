@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "experiment": "odi_lineup",
+  "analysis_manifest_sha256": "1cd93b3b761ec47f201ae02aa5d19526d3b2fc6db77b2dc735a079cd52f0970b",
+  "publication_code_sha256": {
+    "publication.py": "5b51a1d2a76dfbdce5ee693f318b11fa2f87b576570461a2e08beedeea023529",
+    "rankings.py": "95e90cfa5ac78da047545afbc4e792a1ea6f1b16873bcd6e6f5882c1f01bac9f"
+  },
+  "outputs": {
+    "analysis_manifest.json": "1cd93b3b761ec47f201ae02aa5d19526d3b2fc6db77b2dc735a079cd52f0970b",
+    "calibration.csv": "b1090db0388c8a3133e4b289bef2b558e1f80c14fc71da8d2f33d0b4c93adf74",
+    "coefficients.csv": "f00742204ee3c73d3484883aace8ab389c278360f5afd64d6aff9e5db33057c0",
+    "comparisons.csv": "ad4ae75b566d2e432951c58f8b6bdb3c8d5af1d5f59aeeff18c58346011e8bf3",
+    "diagnostics.csv": "6bb4ac328e6cd6fd9a4da9dbb5331cbdb9070deae5fbdd08bba585343bdd9e33",
+    "metrics.csv": "f58eaf74eba428f3e330b5d12f64f2d0be1f78e60dc3acec151a836d4599ebea",
+    "paired_losses.csv": "96566ec10a6b59bd6462dbe43a7e09af391c45c578401c27068a14c85bf70a1a",
+    "predictions.csv": "c025aa6705ca518d798b66de345c1784dde9eec40cef7f14977e7844260b96cb",
+    "preparation_manifest.json": "686cc1856909a555c19b84fa8fbd08557c5a720624b2649ee4711aae0ea86a49",
+    "rankings.csv": "028cc30502239242db364e002e9827116b4e83565968e58f1a6131a1201ca3ae",
+    "rankings.md": "8a4a02ac77446a322f4bbc034005635720a9b6d357616a4d288f5db9e82f1bc1",
+    "report.md": "e79b112f7e3a5e0f6128e8e43868a32d3691bcec81bfc739f80ef97af018579b",
+    "tuning.csv": "1fa6b99447260383f2a7bb0a3449d370492fe962ff73451af77e23dd578ee791"
+  }
+}

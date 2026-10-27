@@ -1,0 +1,72 @@
+project:
+  type: website
+  output-dir: out/site
+  execute-dir: project
+  render:
+    - index.qmd
+    - docs/ratings.qmd
+    - docs/test.qmd
+    - docs/odi.qmd
+    - docs/t20i.qmd
+    - docs/data.qmd
+    - docs/contributions.qmd
+    - docs/histories.qmd
+    - docs/models.qmd
+    - docs/methods.qmd
+    - docs/pipeline.qmd
+    - docs/lineup_experiment.qmd
+    - docs/format_rankings.qmd
+  resources:
+    - out/release/lineup/**
+    - out/release/current/**
+
+website:
+  title: Player value
+  description: Cricket player strength, contributions, histories, and model comparisons.
+  site-url: https://outside-edge.github.io/player_value/
+  repo-url: https://github.com/outside-edge/player_value
+  navbar:
+    background: '#173744'
+    foreground: '#ffffff'
+    left:
+      - href: index.qmd
+        text: Overview
+      - text: Rankings
+        menu:
+          - href: docs/test.qmd
+            text: Test
+          - href: docs/odi.qmd
+            text: ODI
+          - href: docs/t20i.qmd
+            text: T20I
+          - href: docs/ratings.qmd
+            text: All formats
+      - href: docs/methods.qmd
+        text: Methods
+      - href: docs/data.qmd
+        text: Data
+      - href: docs/models.qmd
+        text: Research
+    right:
+      - href: https://outside-edge.github.io/side_order/
+        text: Team ratings
+      - icon: github
+        href: https://github.com/outside-edge/player_value
+        aria-label: Source code
+  page-footer:
+    left: Player value · Outside Edge · Independent of ICC rankings
+    right:
+      - href: docs/pipeline.qmd
+        text: Reproduction
+      - href: https://github.com/outside-edge/player_value/issues
+        text: Report an issue
+
+format:
+  html:
+    theme: cosmo
+    css: docs/styles.css
+    toc: true
+    lang: en
+
+execute:
+  enabled: false

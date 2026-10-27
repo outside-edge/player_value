@@ -1,0 +1,14 @@
+:root {
+  --ink: #173744;
+  --accent: #176c70;
+}
+
+body { color: #24333b; }
+h1, h2, h3 { color: var(--ink); }
+a { color: var(--accent); }
+main { max-width: 72rem; }
+.navbar-brand { font-weight: 700; letter-spacing: .02em; }
+.table { font-variant-numeric: tabular-nums; }
+
+
+.table { display: block; overflow-x: auto; }

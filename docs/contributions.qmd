@@ -1,0 +1,25 @@
+---
+title: Player contributions
+---
+
+Contribution measures assign value to performances in completed matches. The
+initial candidate is ball-level batting and bowling value that accounts for runs,
+wickets, and the state of the innings. Win probability added will provide a
+separate account of how much events changed a team's chances in their actual
+match context.
+
+**Validated contribution estimates are not yet available.** The
+[exploratory WAR results](https://github.com/outside-edge/player_value/tree/main/experiments/war)
+use assumptions that still require calibration. They are not current rankings.
+
+WAR requires both a replacement baseline and a defensible conversion to expected
+wins. An average player is not necessarily a replacement player. The baseline
+must reflect an available substitute appropriate to the role and competition.
+
+Season and career totals will be accompanied by an explicitly defined rate
+measure and exposure. Different units, such as runs above replacement and win
+probability added, will remain separate. Batting, bowling, and fielding credit
+cannot simply be added if their attribution rules count the same event twice.
+
+Detailed fielding opportunities are not available in the current data. Any total
+player measure must disclose what fielding contribution it can and cannot capture.

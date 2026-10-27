@@ -1,0 +1,4 @@
+/out/release/** -text -whitespace
+/experiments/war/** -text -whitespace
+/experiments/relocations.csv -text whitespace=cr-at-eol
+/docs/lineup_experiment.qmd -whitespace

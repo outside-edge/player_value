@@ -1,0 +1,77 @@
+---
+title: Model comparisons
+---
+
+The first experiment compares team-only, player-only, and combined lineup forecasts
+on future ODI matches. Read the [experiment specification](lineup_experiment.qmd)
+for cutoffs, shrinkage, uncertainty, independent review, and interpretation limits.
+Rendering reads the saved publication and does not refit models.
+
+{{< include ../out/release/lineup/report.md >}}
+
+## Research sequence
+
+| Stage | Purpose | Status |
+| --- | --- | --- |
+| International match and participant preparation | Stable identities, dated outcomes, and substitution flags | Implemented |
+| Regularized lineup win/loss model | Outcome-based player benchmark | Implemented; saved pilot above |
+| Player-only rankings by format | Five-year outcome associations for Tests, ODIs, and T20Is | [Published tables](ratings.qmd); exploratory |
+| Ball-level runs and wickets | Contextual contribution estimates | Specification and estimation pending |
+| Time-varying player strength | Current ability and future-match forecasts | Follows the initial benchmarks |
+| Win probability added | Retrospective match impact | Follows a validated probability model |
+| Replacement simulation | Counterfactual lineup selection | Deferred |
+
+## Outcome-based benchmark
+
+The player-model predictor is the sum of team A's player effects minus the sum of team
+B's effects, plus context terms that reverse direction when the teams are swapped.
+Shrinkage is needed because teammates often appear together. A coefficient is a
+relative log-odds contribution, not a number of wins or a causal effect.
+
+The first binary experiment uses decisive matches with unambiguous fixed
+XIs. Preparation retains other outcomes and substitution matches with explicit
+flags; later specifications may use them. Run margins and wicket margins are
+different quantities and must not be combined as a response. A successful chase
+also ends when the target is reached, truncating the observed scoring margin.
+
+National-team strength and player strength are entangled. Team effects, time
+windows, and priors affect how shared performance is allocated. Before interpreting
+individual rankings, examine lineup overlap, weakly identified players, and
+sensitivity to those choices. More deliveries do not create more independent
+match outcomes for a lineup regression.
+
+## Ball-level valuation
+
+The model must account for the future cost of losing a wicket, as well as immediate
+runs. One candidate values an event as runs scored plus the change in expected
+remaining innings runs. Chases require target-aware valuation. Dismissal types,
+extras, fielding credit, shortened matches, and exposure need explicit rules before
+estimation. These are research specifications, not assumptions hidden in a parser.
+
+## Evaluation and publication gates
+
+- Use chronological future-match holdouts, tuning hyperparameters within earlier
+  training periods. Keep all deliveries from a match in the same partition.
+- Compare lineup forecasts against a team-only model on the same matches. Use
+  dated `side_order` exports with documented match-ID mappings where applicable.
+- Report log loss, Brier score, calibration, and uncertainty in score differences;
+  account for dependence within series.
+- Test sensitivity to regularization, time windows, team effects, replacement
+  definitions, and sample restrictions. Show rank uncertainty and exposure.
+- Assess men's and women's ODIs separately. Prediction quality alone does not
+  establish that individual credit has been allocated correctly.
+- Check models on simulated data with known player effects, including players
+  who always appear together. The model must expose weak identification.
+
+Time-varying strength becomes a published rating only after comparison with the
+static and team-only benchmarks. A contribution measure becomes WAR only after
+replacement and wins calibration are defended. Replacement probability differences
+need not sum to the team's wins in a nonlinear model.
+
+## Precedents
+
+- [Sill: regularized adjusted plus-minus](https://www.sloansportsconference.com/research-papers/improved-nba-adjusted-using-regularization-and-out-of-sample-testing).
+- [Sabin: American football plus-minus](https://doi.org/10.1515/jqas-2020-0033).
+- [Chandrakar and Das: cricket player inclusion and winning probability](https://doi.org/10.1111/anzs.12353).
+- [Rafique: cricWAR](https://www.stat.cmu.edu/cmsac/conference/2022/assets/pdf/HassanRafique.pdf).
+- [Davis, Perera, and Swartz: simulation-based cricket evaluation](https://journals.sagepub.com/doi/10.3233/JSA-150002).

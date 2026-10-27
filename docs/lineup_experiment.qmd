@@ -1,0 +1,126 @@
+---
+title: ODI lineup experiment
+---
+
+## Question and data exposure
+
+Does including player identities improve future-match win probabilities beyond a
+team-only model for decisive, fixed-XI ODIs in the available Cricsheet sample?
+The primary contrast is combined team-plus-player versus team-only mean log loss,
+separately for men's and women's matches. Player-only prediction is secondary.
+This is a predictive comparison, not a causal estimate of selecting a player.
+
+This specification was written before fitting these models. Match counts and the
+preparation code's outcomes were already accessible; this is a self-attested
+development protocol, not a registered or blinded study.
+
+## Sample and information
+
+Use `lineup_eligible=1` matches and require eleven distinct identified participants
+per side. Retain all such decisive results, including shortened matches. Ties,
+no-results, and matches involving replacements remain outside this initial binary
+experiment. Replacement status is known retrospectively: evaluation is conditional
+on this restricted sample, not an operational forecast of every scheduled ODI.
+
+Team A is the alphabetically first team. Its win indicator is the response.
+Use only team identities, selected players, and toss winner/decision as predictors.
+The toss winner contributes +1 for A, -1 for B; the team choosing or being sent
+in to bat contributes +1 for A, -1 for B. Missing toss information contributes zero
+for the corresponding feature. Venue/home effects await an audited venue mapping;
+this team benchmark is not a claim to match the best available team forecast.
+
+## Models
+
+Fit three ridge logistic models: team effects; player effects; and both. All
+include the same two toss terms. Encode each entity as +1 for A and -1 for B,
+and fit without an intercept. Swapping the sides must complement the prediction.
+
+Use scikit-learn `LogisticRegression` with `l1_ratio=0`, `solver="lbfgs"`,
+`fit_intercept=False`, `tol=1e-8`, `max_iter=2000`, and no class weighting.
+The objective is summed binary log loss plus `sum(beta**2)/(2*C)`.
+All coefficients, including context, receive the same penalty within a model.
+Combined-model attribution between team and player effects therefore depends on
+this penalty convention; it is not separately identified institutional value.
+Treat convergence warnings as failed fits rather than silently accepting them.
+
+Fit feature vocabularies on training matches only. Unseen entities contribute
+zero, the shrinkage center. Export counts of unseen players and teams per forecast.
+Do not use names or career exposure from later matches to label an earlier fit.
+
+## Chronological evaluation
+
+Evaluate calendar years 2023, 2024, and 2025 separately. The primary training
+window is five calendar years preceding each evaluation year; a three-year window
+is a pre-specified sensitivity analysis. Within each window, reserve the last
+calendar year for validation. Fit on earlier years, select `C` from
+`[0.01, 0.1, 1, 10]` by validation log loss, then refit using the whole window.
+Break exact ties toward smaller `C`. Retain every tuning score and every
+evaluation prediction. If a split lacks observations or training has only one
+outcome class, fail explicitly. Do not silently alter the split or pool genders.
+
+The fitted model stays fixed throughout the evaluation year. Later annual fits
+may use earlier evaluation years as historical training data, as in a rolling
+forecast exercise. The preparation cutoff must cover each whole evaluation year.
+Source revisions mean this backtest is not proof of data availability at each
+historical cutoff.
+
+Use start dates to assign validation and evaluation cohorts. Training and refitting
+require completion before the relevant cutoff. A match that starts before a cutoff
+and finishes after it is neither available for training at that cutoff nor a new
+forecast at that cutoff. Refit on all completed matches in the window, including
+any such boundary match once its result is available. Quarter blocks use match
+start dates. These rules were clarified during independent design review
+before estimation.
+
+## Metrics and uncertainty
+
+Report annual and pooled match-weighted log loss, Brier score, and five fixed
+calibration bins spanning [0, 1]. Include a 0.5 probability reference. Export
+paired loss differences between each lineup model and the team baseline.
+Differences are lineup minus team; negative differences favor the lineup model.
+
+For pooled differences, resample whole calendar quarters with replacement, using
+2,000 replicates and seed 20261027. Each replicate retains every match within
+each sampled quarter, and divides summed loss differences by the number of
+sampled matches. Report percentile 95% intervals and the number of nonempty blocks.
+This preserves some within-period dependence, including many series and tournament
+matches. It does not guarantee independence across quarters, and 2023–2025 provide
+at most twelve blocks. These are exploratory intervals conditional on fitted
+forecasts, not full uncertainty from training, tuning, or player identification.
+No multiplicity-adjusted hypothesis tests or significance declarations are planned.
+
+## Attribution and acceptance
+
+Export coefficients in log-odds units, training appearances, the fraction of a
+player's matches shared with their most frequent teammate, and exact identical
+appearance-pattern groups. Perfectly co-occurring players cannot be distinguished
+by these outcomes. Also record connected components of the training opponent
+network. Ridge coefficients are finite even when individual attribution is weak.
+Do not export ranks, player confidence intervals, WAR, or current-strength claims
+from this static experiment.
+
+Test swap symmetry, unseen-player handling, cutoff leakage, coefficient recovery
+on simulated changing lineups, and exact co-occurrence before fitting real data.
+Validate input hashes and output provenance. Obtain an independent design/code
+review before the first real-data fit.
+
+If added player identities do not improve the team benchmark, retain that finding.
+If improvement changes across windows or genders, report the variation. Better
+prediction would justify further modeling, not validate individual rankings.
+Dynamic strength, wicket valuation, replacement calibration, and WPA remain
+separate next stages.
+
+## Deviations
+
+None at specification time. Later changes and their reasons will be recorded here.
+
+## Independent review before estimation
+
+An independent model reviewed the design and core code before real-data fitting.
+The review checked the shrinkage objective, swap symmetry, and unequal-size block
+resampling on synthetic data. It requested explicit calendar-boundary handling,
+refit sample IDs, and exported match-level paired losses; these are included.
+The review found no additional blocker for this limited predictive comparison.
+It emphasized that effective shrinkage, omitted venue/time variation, and weak
+individual identification remain interpretation limits.
+

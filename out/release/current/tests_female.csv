@@ -1,0 +1,73 @@
+format,gender,as_of,training_start,comparison_group,rank,player_id,player_name,teams,rating_log_win_loss_odds,training_appearances,last_appearance,fewer_than_20_appearances,regularization_c,tuning_status,max_teammate_share,identical_pattern_group
+Test,female,2026-10-26,2021-10-27,02181d9a,1,2e81be88,D Brown,Australia,0.10392326021139846,5,2026-03-08,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,2,9c3d4e8a,YH Bhatia,India,0.09796993123722332,3,2026-07-13,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,3,237ec05b,RS Gayakwad,India,0.08788682812324293,3,2024-07-01,1,0.1,untuned_sparse_data,1.0,237ec05b;7298db76;8026ea72
+Test,female,2026-10-26,2021-10-27,02181d9a,3,7298db76,Renuka Singh,India,0.08788682812324293,3,2024-07-01,1,0.1,untuned_sparse_data,1.0,237ec05b;7298db76;8026ea72
+Test,female,2026-10-26,2021-10-27,02181d9a,3,8026ea72,P Vastrakar,India,0.08788682812324293,3,2024-07-01,1,0.1,untuned_sparse_data,1.0,237ec05b;7298db76;8026ea72
+Test,female,2026-10-26,2021-10-27,02181d9a,6,201fef33,DB Sharma,India,0.07718103000623419,5,2026-07-13,1,0.1,untuned_sparse_data,1.0,201fef33;53cd8da6;5d2eda89;c4c374d9;cb08b611;d8f59089
+Test,female,2026-10-26,2021-10-27,02181d9a,6,53cd8da6,H Kaur,India,0.07718103000623419,5,2026-07-13,1,0.1,untuned_sparse_data,1.0,201fef33;53cd8da6;5d2eda89;c4c374d9;cb08b611;d8f59089
+Test,female,2026-10-26,2021-10-27,02181d9a,6,5d2eda89,S Mandhana,India,0.07718103000623419,5,2026-07-13,1,0.1,untuned_sparse_data,1.0,201fef33;53cd8da6;5d2eda89;c4c374d9;cb08b611;d8f59089
+Test,female,2026-10-26,2021-10-27,02181d9a,6,c4c374d9,S Rana,India,0.07718103000623419,5,2026-07-13,1,0.1,untuned_sparse_data,1.0,201fef33;53cd8da6;5d2eda89;c4c374d9;cb08b611;d8f59089
+Test,female,2026-10-26,2021-10-27,02181d9a,6,cb08b611,JI Rodrigues,India,0.07718103000623419,5,2026-07-13,1,0.1,untuned_sparse_data,1.0,201fef33;53cd8da6;5d2eda89;c4c374d9;cb08b611;d8f59089
+Test,female,2026-10-26,2021-10-27,02181d9a,6,d8f59089,Shafali Verma,India,0.07718103000623419,5,2026-07-13,1,0.1,untuned_sparse_data,1.0,201fef33;53cd8da6;5d2eda89;c4c374d9;cb08b611;d8f59089
+Test,female,2026-10-26,2021-10-27,02181d9a,12,4e6ef14f,P Litchfield,Australia,0.07252341319142319,5,2026-03-08,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,13,5c30d455,G Voll,Australia,0.0671558470507633,2,2026-03-08,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,14,321644de,AJ Healy,Australia,0.05985082016817182,6,2026-03-08,1,0.1,untuned_sparse_data,1.0,321644de;52d1dbc8;65d9b6b6;83558266;bc969efb;be150fc8;ca5acfa4
+Test,female,2026-10-26,2021-10-27,02181d9a,14,52d1dbc8,BL Mooney,Australia,0.05985082016817182,6,2026-03-08,1,0.1,untuned_sparse_data,1.0,321644de;52d1dbc8;65d9b6b6;83558266;bc969efb;be150fc8;ca5acfa4
+Test,female,2026-10-26,2021-10-27,02181d9a,14,65d9b6b6,A Sutherland,Australia,0.05985082016817182,6,2026-03-08,1,0.1,untuned_sparse_data,1.0,321644de;52d1dbc8;65d9b6b6;83558266;bc969efb;be150fc8;ca5acfa4
+Test,female,2026-10-26,2021-10-27,02181d9a,14,83558266,A King,Australia,0.05985082016817182,6,2026-03-08,1,0.1,untuned_sparse_data,1.0,321644de;52d1dbc8;65d9b6b6;83558266;bc969efb;be150fc8;ca5acfa4
+Test,female,2026-10-26,2021-10-27,02181d9a,14,bc969efb,A Gardner,Australia,0.05985082016817182,6,2026-03-08,1,0.1,untuned_sparse_data,1.0,321644de;52d1dbc8;65d9b6b6;83558266;bc969efb;be150fc8;ca5acfa4
+Test,female,2026-10-26,2021-10-27,02181d9a,14,be150fc8,EA Perry,Australia,0.05985082016817182,6,2026-03-08,1,0.1,untuned_sparse_data,1.0,321644de;52d1dbc8;65d9b6b6;83558266;bc969efb;be150fc8;ca5acfa4
+Test,female,2026-10-26,2021-10-27,02181d9a,14,ca5acfa4,TM McGrath,Australia,0.05985082016817182,6,2026-03-08,1,0.1,untuned_sparse_data,1.0,321644de;52d1dbc8;65d9b6b6;83558266;bc969efb;be150fc8;ca5acfa4
+Test,female,2026-10-26,2021-10-27,02181d9a,21,721e0199,RM Ghosh,India,0.054129133627220466,4,2026-07-13,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,22,6f9170c6,S Shubha,India,0.043814388080016295,2,2024-07-01,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,23,c347ffe6,LK Hamilton,Australia,0.041551392931991706,1,2026-03-08,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,24,0b69a844,KJ Garth,Australia,0.030972020259431486,4,2025-02-01,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,25,583ce32c,N Shree Charani,India,0.030845594814982957,1,2026-07-13,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,26,c6625a26,CE Dean,England,0.02990062399486022,3,2024-12-17,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,27,99e23670,S Molineux,Australia,0.02333618429717363,1,2024-02-17,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,28,459a7b0a,R MacDonald-Gay,England,0.014675473231850974,2,2025-02-01,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,29,32497ecd,A Shrubsole,England,0.012672593023251367,1,2022-01-30,1,0.1,untuned_sparse_data,1.0,32497ecd;5230a33d;6a434bd3
+Test,female,2026-10-26,2021-10-27,02181d9a,29,5230a33d,L Winfield-Hill,England,0.012672593023251367,1,2022-01-30,1,0.1,untuned_sparse_data,1.0,32497ecd;5230a33d;6a434bd3
+Test,female,2026-10-26,2021-10-27,02181d9a,29,6a434bd3,KH Brunt,England,0.012672593023251367,1,2022-01-30,1,0.1,untuned_sparse_data,1.0,32497ecd;5230a33d;6a434bd3
+Test,female,2026-10-26,2021-10-27,02181d9a,32,0bb32e98,L Goodall,South Africa,0.003889634186743703,1,2022-06-30,1,0.1,untuned_sparse_data,1.0,0bb32e98;14baca9f;7b01ce83
+Test,female,2026-10-26,2021-10-27,02181d9a,32,14baca9f,A Steyn,South Africa,0.003889634186743703,1,2022-06-30,1,0.1,untuned_sparse_data,1.0,0bb32e98;14baca9f;7b01ce83
+Test,female,2026-10-26,2021-10-27,02181d9a,32,7b01ce83,L Lee,South Africa,0.003889634186743703,1,2022-06-30,1,0.1,untuned_sparse_data,1.0,0bb32e98;14baca9f;7b01ce83
+Test,female,2026-10-26,2021-10-27,02181d9a,35,35828bdd,AN Davidson-Richards,England,-0.003889634186743703,1,2022-06-30,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,36,3708b522,SG Satghare,India,-0.010705798117008745,2,2026-07-13,1,0.1,untuned_sparse_data,1.0,3708b522;4d622fee
+Test,female,2026-10-26,2021-10-27,02181d9a,36,4d622fee,K Goud,India,-0.010705798117008745,2,2026-07-13,1,0.1,untuned_sparse_data,1.0,3708b522;4d622fee
+Test,female,2026-10-26,2021-10-27,02181d9a,38,27e003ce,MM Lanning,Australia,-0.012672593023251367,1,2022-01-30,1,0.1,untuned_sparse_data,1.0,27e003ce;d7c6b0fb
+Test,female,2026-10-26,2021-10-27,02181d9a,38,d7c6b0fb,RL Haynes,Australia,-0.012672593023251367,1,2022-01-30,1,0.1,untuned_sparse_data,1.0,27e003ce;d7c6b0fb
+Test,female,2026-10-26,2021-10-27,02181d9a,40,c2554b59,ME Bouchier,England,-0.016170121583131983,3,2026-07-13,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,41,06659caa,T Brits,South Africa,-0.02333618429717363,1,2024-02-17,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,42,02181d9a,EL Lamb,England,-0.029993456073456604,2,2023-06-26,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,43,0475a86b,JL Jonassen,Australia,-0.030641211179765107,3,2023-12-24,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,44,910dd54e,A Capsey,England,-0.030845594814982957,1,2026-07-13,1,0.1,untuned_sparse_data,1.0,910dd54e;cd62f670
+Test,female,2026-10-26,2021-10-27,02181d9a,44,cd62f670,MK Villiers,England,-0.030845594814982957,1,2026-07-13,1,0.1,untuned_sparse_data,1.0,910dd54e;cd62f670
+Test,female,2026-10-26,2021-10-27,02181d9a,46,a139c379,DN Wyatt,England,-0.034480245033875645,4,2025-02-01,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,47,e5b17517,IECM Wong,England,-0.03473522900172666,2,2026-07-13,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,48,1ade138e,KL Cross,England,-0.04037275942921896,4,2023-12-16,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,49,45a13dcf,Pratika Rawal,India,-0.041551392931991706,1,2026-03-08,1,0.1,untuned_sparse_data,1.0,45a13dcf;bc773c4a
+Test,female,2026-10-26,2021-10-27,02181d9a,49,bc773c4a,KS Gautam,India,-0.041551392931991706,1,2026-03-08,1,0.1,untuned_sparse_data,1.0,45a13dcf;bc773c4a
+Test,female,2026-10-26,2021-10-27,02181d9a,51,275dff85,L Cheatle,Australia,-0.044072440043226635,1,2023-12-24,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,52,2b425403,D Tucker,South Africa,-0.0440986759981762,2,2024-07-01,1,0.1,untuned_sparse_data,1.0,2b425403;ce85fcaf
+Test,female,2026-10-26,2021-10-27,02181d9a,52,ce85fcaf,M Klaas,South Africa,-0.0440986759981762,2,2024-07-01,1,0.1,untuned_sparse_data,1.0,2b425403;ce85fcaf
+Test,female,2026-10-26,2021-10-27,02181d9a,54,4ba0289e,HC Knight,England,-0.056542881012350936,7,2026-07-13,1,0.1,untuned_sparse_data,1.0,4ba0289e;b05e45e4;b2664905;cdb82f1c;f3a18a0c
+Test,female,2026-10-26,2021-10-27,02181d9a,54,b05e45e4,AE Jones,England,-0.056542881012350936,7,2026-07-13,1,0.1,untuned_sparse_data,1.0,4ba0289e;b05e45e4;b2664905;cdb82f1c;f3a18a0c
+Test,female,2026-10-26,2021-10-27,02181d9a,54,b2664905,TT Beaumont,England,-0.056542881012350936,7,2026-07-13,1,0.1,untuned_sparse_data,1.0,4ba0289e;b05e45e4;b2664905;cdb82f1c;f3a18a0c
+Test,female,2026-10-26,2021-10-27,02181d9a,54,cdb82f1c,S Ecclestone,England,-0.056542881012350936,7,2026-07-13,1,0.1,untuned_sparse_data,1.0,4ba0289e;b05e45e4;b2664905;cdb82f1c;f3a18a0c
+Test,female,2026-10-26,2021-10-27,02181d9a,54,f3a18a0c,NR Sciver-Brunt,England,-0.056542881012350936,7,2026-07-13,1,0.1,untuned_sparse_data,1.0,4ba0289e;b05e45e4;b2664905;cdb82f1c;f3a18a0c
+Test,female,2026-10-26,2021-10-27,02181d9a,59,63e3b6b3,M Kapp,South Africa,-0.05715278486488144,3,2024-12-17,1,0.1,untuned_sparse_data,1.0,63e3b6b3;6e28e586
+Test,female,2026-10-26,2021-10-27,02181d9a,59,6e28e586,TS Sekhukhune,South Africa,-0.05715278486488144,3,2024-12-17,1,0.1,untuned_sparse_data,1.0,63e3b6b3;6e28e586
+Test,female,2026-10-26,2021-10-27,02181d9a,61,d2b1f515,A Dercksen,South Africa,-0.06104241905162515,2,2024-12-17,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,62,4d4605e6,CL Tryon,South Africa,-0.0636161116477962,2,2024-12-17,1,0.1,untuned_sparse_data,1.0,4d4605e6;ccaa3434
+Test,female,2026-10-26,2021-10-27,02181d9a,62,ccaa3434,A Hlubi,South Africa,-0.0636161116477962,2,2024-12-17,1,0.1,untuned_sparse_data,1.0,4d4605e6;ccaa3434
+Test,female,2026-10-26,2021-10-27,02181d9a,64,31adb911,L Filer,England,-0.06532583984885859,5,2026-07-13,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,65,3a9e9cb2,SIR Dunkley,England,-0.06597721354799056,5,2025-02-01,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,66,38b4583c,LK Bell,England,-0.06921547403560231,6,2026-07-13,1,0.1,untuned_sparse_data,1.0,
+Test,female,2026-10-26,2021-10-27,02181d9a,67,34304210,S Jafta,South Africa,-0.08048896916205507,4,2024-12-17,1,0.1,untuned_sparse_data,1.0,34304210;686362af;6d76bc23;dcf0e8f4;e60f81c9;ea544967
+Test,female,2026-10-26,2021-10-27,02181d9a,67,686362af,N Mlaba,South Africa,-0.08048896916205507,4,2024-12-17,1,0.1,untuned_sparse_data,1.0,34304210;686362af;6d76bc23;dcf0e8f4;e60f81c9;ea544967
+Test,female,2026-10-26,2021-10-27,02181d9a,67,6d76bc23,S Luus,South Africa,-0.08048896916205507,4,2024-12-17,1,0.1,untuned_sparse_data,1.0,34304210;686362af;6d76bc23;dcf0e8f4;e60f81c9;ea544967
+Test,female,2026-10-26,2021-10-27,02181d9a,67,dcf0e8f4,A Bosch,South Africa,-0.08048896916205507,4,2024-12-17,1,0.1,untuned_sparse_data,1.0,34304210;686362af;6d76bc23;dcf0e8f4;e60f81c9;ea544967
+Test,female,2026-10-26,2021-10-27,02181d9a,67,e60f81c9,L Wolvaardt,South Africa,-0.08048896916205507,4,2024-12-17,1,0.1,untuned_sparse_data,1.0,34304210;686362af;6d76bc23;dcf0e8f4;e60f81c9;ea544967
+Test,female,2026-10-26,2021-10-27,02181d9a,67,ea544967,N de Klerk,South Africa,-0.08048896916205507,4,2024-12-17,1,0.1,untuned_sparse_data,1.0,34304210;686362af;6d76bc23;dcf0e8f4;e60f81c9;ea544967

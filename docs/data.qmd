@@ -1,0 +1,43 @@
+---
+title: Data and downloads
+---
+
+{{< include ../out/site-content/coverage.md >}}
+
+## Publication files
+
+| Download | Contents |
+| --- | --- |
+| [All player rankings](../out/release/current/rankings.csv) | Format, gender, stable player ID, rank, coefficient, appearances, last appearance, and teammate-overlap diagnostics |
+| [Fitted models](../out/release/current/models.json) | Feature names, outcome classes, coefficients, intercepts, and regularization settings |
+| [Publication manifest](../out/release/current/manifest.json) | Match IDs, tuning splits and scores, exclusions, package versions, and checksums |
+| [Test provenance](../out/release/current/tests_preparation.json) | Source-file hashes and acquisition receipt |
+| [ODI provenance](../out/release/current/odis_preparation.json) | Source-file hashes and acquisition receipt |
+| [T20I provenance](../out/release/current/t20is_preparation.json) | Source-file hashes and acquisition receipt |
+| [Historical ODI experiment](../out/release/lineup/rankings.csv) | Earlier fit cutoffs and alternative model specifications |
+
+## Coverage and exclusions
+
+The source is [Cricsheet's international match archives](https://cricsheet.org/downloads/).
+Available counts above cover the five-year window; used counts additionally apply
+the fixed-XI and outcome rules. Tests retain draws and ties. ODIs and T20Is require
+a decisive result. No-results and matches with ambiguous XIs or recorded match
+replacements do not enter the models. All players in eligible matches are ranked;
+low appearance counts are flagged, not removed.
+
+This is not a census of international cricket. Source coverage differs by format
+and gender, and Cricsheet withholds some Afghanistan-related matches. The source
+remains subject to [Cricsheet's licensing terms](https://cricsheet.org/licensing/).
+The [preparation guide](pipeline.qmd) explains identity checks and date exclusions.
+
+## Using the downloads
+
+Join players by stable Cricsheet person ID, not printed name. Keep format, gender,
+cutoff, and comparison group in the key when comparing ratings. Do not add scores
+across separately fitted models. A rating is a log win/loss odds coefficient;
+it is not a count of wins or a replacement-level estimate.
+
+The saved publication is verified before every website build. Rendering regenerates
+format tables from those files without downloading match data or fitting models.
+See [reproduction commands](pipeline.qmd) and the
+[publication history](https://github.com/outside-edge/player_value/commits/main/out/release/current).

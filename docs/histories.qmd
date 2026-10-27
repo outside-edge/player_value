@@ -1,0 +1,20 @@
+---
+title: Player histories
+---
+
+A published history must distinguish estimates available at the time from
+retrospective estimates that use later evidence. A career curve fitted using all
+available matches cannot also serve as evidence of historical forecast accuracy.
+
+**A dedicated history view is not yet available.** Historical fit cutoffs are
+included in the [historical ODI download](../out/release/lineup/rankings.csv). The preparation pipeline joins
+appearances by Cricsheet person ID, preserving the name supplied in each match.
+This allows name changes and spelling variants to refer to the same person.
+
+Future releases will retain each publication cutoff. Current-strength histories
+will use only observations available at each cutoff; retrospective smoothing will
+be labeled separately. Contribution histories will identify the valuation model
+and its version so changes in method are distinguishable from additional matches.
+
+Each profile will show strength and cumulative contribution separately, with
+competition, exposure, uncertainty, and units next to the estimates.

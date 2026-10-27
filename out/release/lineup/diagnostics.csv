@@ -1,0 +1,13 @@
+gender,window_years,evaluation_year,training_matches,validation_matches,evaluation_matches,training_players,players_in_identical_groups,identical_groups,opponent_components
+male,3,2023,239,138,181,549,63,29,1
+male,3,2024,378,181,81,635,69,22,1
+male,3,2025,400,81,102,674,71,28,1
+male,5,2023,463,138,181,716,51,21,1
+male,5,2024,543,181,81,756,54,16,1
+male,5,2025,501,81,102,771,70,28,1
+female,3,2023,121,71,41,265,58,18,1
+female,3,2024,156,41,65,308,59,19,1
+female,3,2025,177,65,88,359,56,19,1
+female,5,2023,189,71,41,315,53,17,1
+female,5,2024,199,41,65,333,55,18,1
+female,5,2025,227,65,88,385,48,15,1

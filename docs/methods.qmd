@@ -1,0 +1,100 @@
+---
+title: Methods and data
+---
+
+## Quantities
+
+| Quantity | Interpretation |
+| --- | --- |
+| Strength | Estimated ability at a specified date and reference context |
+| Contribution | Value assigned to performances in completed matches |
+| Runs above replacement | Run value relative to an explicitly defined substitute |
+| WAR | Expected wins above that replacement baseline |
+| Win probability added | Change in modeled winning probability around observed events |
+
+These quantities answer different questions. Each model will keep its own scale,
+uncertainty method, and assumptions. An estimate of zero relative to the average
+player does not establish replacement level.
+
+## Data and coverage
+
+The source is [Cricsheet](https://cricsheet.org/downloads/), whose
+[JSON documentation](https://cricsheet.org/format/json/) defines participants,
+registries, replacements, and outcomes. Source data remain subject to
+[Cricsheet's licensing terms](https://cricsheet.org/licensing/).
+
+The implemented preparation stage supports official JSON and the existing YAML
+downloads. It writes separate Test, ODI, and T20I match and participant tables, plus player
+identity tables. Delivery records remain in the raw source for subsequent ball-level work.
+The source receipt and per-file hashes identify the exact input snapshot.
+
+Coverage is the set of available source matches, not a certified census of international
+cricket. Men's and women's source coverage may differ. The manifest reports counts
+separately and distinguishes exclusions after the requested cutoff from other
+formats. It does not infer that a complete historical archive was available at
+an earlier forecast date.
+
+## Participants and eligibility
+
+Cricsheet's `players` lists include replacements as well as the starting eleven.
+The participant table therefore makes no starting-XI claim. A match is flagged
+`has_fixed_xi=1` only if each side lists eleven distinct people and no match
+replacement or supersub is recorded. The initial binary lineup eligibility flag
+additionally requires a decisive result. The Test ranking model also admits fixed-XI draws and ties. These are sample
+flags, not deletions.
+
+Stable IDs are required for every listed participant. Missing IDs, duplicated
+participants, invalid outcomes, and duplicate match IDs stop preparation with the
+source filename. Missing participant lists remain visible as ineligible matches.
+Names are preserved per appearance; the identity table uses each person's latest
+observed name within the cutoff. Team labels and venue labels remain source
+strings, so joins to external team ratings need an audited mapping.
+
+Ties, draws, and no-results remain distinct. A tie resolved by an eliminator is
+retained as a tie with the eliminator recorded separately. Toss and outcome fields
+are separate: outcome-dependent information must not enter pre-match predictions.
+
+## Selection and match difficulty
+
+A player who appears mainly in easier fixtures can receive an inflated rating if
+the model misses what makes those fixtures easy. The current model includes all
+22 player identities: weaker opposing XIs and stronger teammates therefore enter
+the predictor, alongside the toss and batting first. This adjusts for some
+schedule differences, following the logic of
+[regularized adjusted plus-minus](https://faculty.wharton.upenn.edu/wp-content/uploads/2015/07/shanejensen.pmlogit.2013.pdf).
+It does not make team selection random.
+
+The present ratings do **not** separately adjust for home advantage, neutral
+venues, pitch suitability, injuries, player availability, or changes in underlying
+team conditions over the five-year window. A specialist selected only on favorable
+pitches, or a reserve selected only against weaker touring sides, can remain
+confounded with those conditions. Shrinkage addresses instability; it does not
+remove this selection bias.
+
+The next comparison should add audited home/away/neutral status and venue context,
+and examine team strength measured strictly before each match. A team-strength
+baseline changes the target: player coefficients then describe departures from
+that baseline. It should be reported as a separate specification, with changes in
+rankings and chronological predictive performance, rather than treated as an
+automatic correction to the existing player-only rankings.
+
+A useful diagnostic is each player's distribution of pre-match fixture difficulty
+and whether alternative players actually appear in comparable fixtures. Little
+overlap means estimates depend heavily on extrapolation. Selection weighting would
+require a defensible pool of available but unselected players and measured selection
+predictors; playing XIs alone do not provide that information. Such adjustment
+still relies on no important unmeasured confounding and adequate overlap. See
+[Goetghebeur et al. on causal questions and adjustment](https://doi.org/10.1002/sim.8741).
+
+Use pre-match conditions for these comparisons. Final run margins, wickets, and
+match performances are consequences of the lineup and must not be added as
+controls for its pre-match contribution. The published rankings remain descriptive
+model associations, with selection bias unresolved.
+
+## Existing WAR calculations
+
+The original notebooks used an assumed runs-to-wins divisor and a percentile or
+scaled-expectation replacement baseline. Mean victory margin among matches won
+by runs is not a marginal runs-per-win estimate. The original calculations are
+preserved for inspection, with their limitations, in
+[the exploratory collection](https://github.com/outside-edge/player_value/tree/main/experiments).

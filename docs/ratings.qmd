@@ -1,0 +1,49 @@
+---
+title: Player rankings
+---
+
+{{< include ../out/release/current/report.md >}}
+
+## Reading the ratings
+
+These are **player-only lineup ratings**: one coefficient for each player, with
+controls for the toss and batting first. The five-year window averages performance
+across that period. It includes retired players and does not claim to measure
+instantaneous form. Scores can be compared within each table, but not between
+formats or men's and women's competitions.
+
+The predictor adds the eleven player coefficients on one side and subtracts those
+on the other. Replacing player $j$ with player $i$ changes the predictor by
+$\beta_i-\beta_j$. A difference of 0.2 multiplies modeled win/loss odds by
+$\exp(0.2)\approx1.22$. In a binary match model, moving from 50% win probability
+would then mean about 55%. In Tests this comparison conditions on a decisive
+result; the model separately predicts draws.
+
+Cross-team matches connect the ratings. Stable teammate combinations still make
+individual attribution difficult, and omitted team conditions can be assigned to
+players. Regularization supplies a particular allocation of shared performance.
+The CSVs identify players with identical participation patterns, appearance counts,
+and each player's largest teammate-overlap share. A connected schedule alone does
+not establish that every player's contribution is separately identified.
+
+The Test model retains draws and ties in a symmetric three-outcome model with a
+common draw propensity. Weather and playing conditions are not modeled separately.
+ODI and T20I tables use decisive matches. All formats require unambiguous fixed XIs;
+recorded match replacements are excluded. Cricsheet coverage is incomplete and
+currently withholds some Afghanistan-related matches. Counts, exclusions, source
+hashes, tuning scores, and fitted coefficients are included with the publication.
+
+These point estimates do not have rank intervals and are **not wins above
+replacement**. Sorting them does not remove uncertainty in attribution. See the
+[format-ranking specification](format_rankings.qmd) for the estimator, tuning rules,
+and checks, and the [ODI forecast comparison](models.qmd) for the earlier
+out-of-sample experiment. The final-year scores used to select regularization in
+these new fits are tuning results, not an independent evaluation.
+
+## Earlier ODI experiment
+
+The [historical ODI rankings](../out/release/lineup/rankings.csv) retain the saved
+2023–2025 fit cutoffs, team-plus-player and player-only variants, and three- and
+five-year windows. They are separate from the new format tables. The original
+[experiment specification](lineup_experiment.qmd) and saved analysis remain intact;
+the user-requested ranking extensions are documented separately.
